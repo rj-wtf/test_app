@@ -280,9 +280,64 @@ The system should not have been asking for my username and password. It should h
 
 After a lot of searching I discovered that somehow on my local machine my SSH-Agent was not working (it appears that this loads your SSH certificate and remembers it). I tried the advice [here](https://www.codegrepper.com/code-examples/shell/git+not+working+with+ssh%5C) for "git not using ssh key", which is:
 
-```ssh -T git@github.com```
-
+```ssh -T git@github.com```  
 ```git remote set-url origin git@github.com:username/repo.git```
 (put your username and the name of your repository where it says username/repo).
 
 It worked! Now when doing ```git push -u origin main``` it pushed my local commit to my github account.
+
+#### Pushing Updates to Git/GitHub
+To commit changes to git (on local machine) use:
+```git add -A``` this will add all files (including new ones) to the repository.
+
+```git commit -m "Write here the summary about what this change entails"```
+
+Now your local machine git will be up-to-date. However, your remote (cloud) git on Github will not be up-to-date yet. If you type ```git status```:
+
+```On branch main```   
+```Your branch is ahead of 'origin/main' by 1 commit.```  
+```(use "git push" to publish your local commits)```  
+
+This means your online git (origin is the online repository, master is the master branch) does not yet have the changes. Push the changes to the cloud with:
+
+```git push origin main```  
+You may need to enter your SSH password.
+## Chpt 66 Front-end: Learn and practice HTML and CSS References
+HTML basics: https://developer.mozilla.org/en-US/docs/Learn/Getting_started_with_the_web/HTML_basics
+
+CSS basics: https://developer.mozilla.org/en-US/docs/Learn/Getting_started_with_the_web/CSS_basics
+
+HTML tables: https://developer.mozilla.org/en-US/docs/Learn/HTML/Tables
+
+HTML forms: https://developer.mozilla.org/en-US/docs/Learn/Forms/Your_first_form
+
+Alternate resource to learn HTML and CSS together while building a website: https://learn.shayhowe.com/html-css/
+## Chpt 68 Add About Pg and Homework Assignment
+With the ROR running, going to a localhost:3000/about page returns the error:
+```ActionController::RoutingError (No route matches [GET] "/about")```
+
+This gives information on what is needed, i.e. some kind of GET statement in the routes file. So in the routes.rb file under the root statement we add:
+```ruby
+get 'about'
+```
+Then we specify where to send this 'about' to. Since it is just a static html page, we can use our pages controller.
+```ruby
+get 'about', to: 'pages#about'
+```
+pages is our controller and about is the action (or method).
+
+Adding it to our controller pages is simply:
+```ruby
+class PagesController < ApplicationController
+  def home
+  end
+
+  def about
+  end
+end
+```
+### Adjusting VS Code
+~~Where Mashrur edits the settings.json file within Settings >> Search: Emmet >> Emmet: Include Languages; since there is no .json file anymore and seems to have been replaced by two fields to enter key and value, I entered the first key:value pair as "*.erb" and "html", and the second as "ruby" and "html".~~ And - didn't work.  
+
+
+
