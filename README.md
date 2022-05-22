@@ -352,3 +352,76 @@ end
 ```
 ### Adjusting VS Code
 ~~Where Mashrur edits the settings.json file within Settings >> Search: Emmet >> Emmet: Include Languages; since there is no .json file anymore and seems to have been replaced by two fields to enter key and value, I entered the first key:value pair as "*.erb" and "html", and the second as "ruby" and "html".~~ And - didn't work.  However, it does work in Atom.
+## Chpt 70 Production Deploy
+Refer to heroku_install.md file for this song & dance lol.
+## Chpt 72 The Back End: Database & tables
+![MVC Model](MVC.png)
+
+Database & models make up the backend, in conjunction with the controllers.
+
+Think of the database and tables as independent from your Rails, as a database management system. Relational databases have tables which are linked to each other through a common identifier. E.g. user id (where each user id is independent and unique).
+
+Column titles in a database are called "attributes".
+
+Rows have the information for each entry. The first column is "id" and is created by Rails.
+
+### CRUD
+What do we want to be able to do with information in a table? For the case of a table of articles written by users, we want the ability to create an article (and store that information), read the article, update an existing article, and delete an article.
+- CREATE
+- READ
+- UPDATE
+- DELETE
+
+![CRUD Example](CRUD.png)
+
+We need a query language to talk with the database. The most common language is called Sequel (SQL), which stands for Structured Query Language.
+
+So within our database we want the ability to create new rows, read existing rows, update existing rows, and delete rows (CRUD).
+
+### ActiveRecord
+Rails uses a middleman called ActiveRecord, known as ORM Object Relational Mapper, to communicate between the Rails Application Code and the Database. So you don't have write SQL queries to communicate with the database, but can use Ruby code instead.
+
+If you navigate to your models folder under the app folder in Rails, you see you have an application_record.rb file. If you open it you'll see it inherits its properties from ActiveRecord Base.
+
+### Scaffold
+Scaffold generator command to create an article model (with two attributes), articles controller, views for articles and migration file to create articles table:
+```
+rails generate scaffold Article title:string description:text
+```
+Command to see routes presented in a viewer-friendly way:
+```
+rails routes --expanded
+```
+The line resources :articles in the config/routes.rb file provides the following routes:
+
+- index of articles (GET request)
+
+- new article (GET)
+
+- create article (POST)
+
+- edit article (GET)
+
+- update article (PUT and PATCH)
+
+- show article (GET)
+
+- delete article (DELETE)
+
+From UI perspective ->
+
+- index lists all the articles in the articles table in the database of the app
+
+- new article deals with the form to enter in new article details
+
+- create handles the submission of the items in the new article form
+
+- edit article deals with the form to enter edited information for an existing article
+
+- update article deals with the submission of the edit article form
+
+- show article displays an individual article based on selection
+
+- delete article deletes an article from the articles table
+
+In preparation for the next section, learn and practice SQL here: https://www.w3schools.com/sql/
